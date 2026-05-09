@@ -314,6 +314,6 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Contact form backend running at http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Contact form backend running on port ${PORT}`);
 });
