@@ -27,19 +27,19 @@ The project is plain Node.js, Express, Nodemailer, Resend, HTML, CSS, and JavaSc
 3. Configure `.env`:
 
    ```env
-   EMAIL_MODE=smtp
+   EMAIL_MODE=resend
    PORT=3000
 
    RESEND_API_KEY=your_resend_api_key_here
    RESEND_FROM="Rabiulawalshuvo Form <notification@rabiulawalshuvo.com>"
+   TO_EMAIL=your_receiver_email@gmail.com
 
+   # SMTP values are only required when EMAIL_MODE=smtp
    SMTP_HOST=smtp.resend.com
    SMTP_PORT=465
    SMTP_USER=resend
    SMTP_PASS=your_resend_api_key_here
    SMTP_FROM="Rabiulawalshuvo Form <notification@rabiulawalshuvo.com>"
-
-   TO_EMAIL=your_receiver_email@gmail.com
    ```
 
    Never commit `.env`. It contains private API keys and SMTP credentials.
@@ -50,7 +50,9 @@ Use `EMAIL_MODE=ethereal` for local preview testing. Ethereal is useful during d
 
 Use `EMAIL_MODE=smtp` for production SMTP sending. The included example uses Resend SMTP with `smtp.resend.com`, port `465`, user `resend`, and your Resend API key as the password.
 
-Use `EMAIL_MODE=resend` to send through the Resend API instead of SMTP. Set `RESEND_API_KEY`, `RESEND_FROM`, and `TO_EMAIL`.
+Use `EMAIL_MODE=resend` to send through the Resend API instead of SMTP. This is the recommended mode for Render free web services because Render blocks outbound SMTP ports 25, 465, and 587.
+
+When using `EMAIL_MODE=resend`, set `RESEND_API_KEY`, `RESEND_FROM`, and `TO_EMAIL`.
 
 For production sending from `notification@rabiulawalshuvo.com`, verify the domain in your SMTP or email API provider, configure the required DNS records, and use that verified sender in `SMTP_FROM` or `RESEND_FROM`.
 

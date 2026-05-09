@@ -194,8 +194,8 @@ function buildEmailBody({ siteId, name, email, phone, message, page_url, userAge
   return { text, html };
 }
 
-async function sendResendEmail({ to, replyTo, subject, text, html }) {
-  const requiredEnv = ["RESEND_API_KEY", "RESEND_FROM"];
+async function sendResendEmail({ replyTo, subject, text, html }) {
+  const requiredEnv = ["RESEND_API_KEY", "RESEND_FROM", "TO_EMAIL"];
   const missingEnv = requiredEnv.filter((key) => !process.env[key]);
 
   if (missingEnv.length > 0) {
@@ -203,18 +203,14 @@ async function sendResendEmail({ to, replyTo, subject, text, html }) {
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const { data, error } = await resend.emails.send({
+  const { data } = await resend.emails.send({
     from: process.env.RESEND_FROM,
-    to,
+    to: process.env.TO_EMAIL,
     replyTo,
     subject,
     text,
     html,
   });
-
-  if (error) {
-    throw new Error(`Resend send failed: ${JSON.stringify(error)}`);
-  }
 
   return data;
 }
