@@ -1,0 +1,22 @@
+{
+  "name": "sms-service",
+  "version": "1.0.0",
+  "description": "Reusable contact-form email backend for local testing.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.4.1",
+    "nodemailer": "^8.0.7",
+    "resend": "^6.12.2"
+  }
+}
